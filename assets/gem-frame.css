@@ -1,0 +1,40 @@
+/* ============================================================
+   gem-frame.css — minimal reset for a gem's DEMO page only.
+
+   This styles the standalone `index.html` demo wrapper (centers
+   the gem on a brand-coloured canvas). It is NOT part of the gem
+   itself and is never copied into a user's site — only
+   shared/byq-brand.css + the gem's own scoped CSS travel with the
+   copy-paste snippet.
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100dvh;
+}
+
+body {
+  background: var(--byq-bg);
+  color: var(--byq-fg);
+  font-family: var(--byq-font-sans);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6vmin;
+}
+
+/* Optional helper the demo can drop on <body> to pin a full-bleed,
+   non-scrolling effect (sphere, particles, etc.). */
+body.byq-demo--full {
+  padding: 0;
+  overflow: hidden;
+}
