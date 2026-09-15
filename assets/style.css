@@ -1,0 +1,43 @@
+/* Dot Grid Flicker — original. A full-bleed Canvas-2D matrix of tiny square
+   dots wakes up from the centre outwards, then flickers forever: each dot
+   re-rolls its brightness on its own random clock. Dot colours are read from
+   the brand tokens in JS, so there is no raw hex here or in the script.
+   Every selector is scoped to .byq-gem--dot-grid-flicker-01. */
+
+.byq-gem--dot-grid-flicker-01 {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--byq-bg);
+  font-family: var(--byq-font-sans);
+  color: var(--byq-fg);
+}
+
+.byq-gem--dot-grid-flicker-01__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.byq-gem--dot-grid-flicker-01__label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.byq-gem--dot-grid-flicker-01__label span {
+  font-family: var(--byq-font-display);
+  /* Weight, tracking and case match the other display-type gems
+     (e.g. dithered-wave-01) so the collection reads as one brand. */
+  font-weight: 400;
+  font-size: clamp(2.5rem, 8.5vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--byq-fg);
+}
