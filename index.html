@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+<script>(function(){if(window.self!==window.top&&/[?&]thumbnail=true/.test(location.search)){window.__byqScrollGuard=1;(function(){var noop=function(){};try{HTMLElement.prototype.focus=noop;SVGElement.prototype.focus=noop;window.focus=noop;}catch(e){}try{Element.prototype.scrollIntoView=noop;if(Element.prototype.scrollIntoViewIfNeeded)Element.prototype.scrollIntoViewIfNeeded=noop;}catch(e){}document.addEventListener('click',function(e){var t=e.target&&e.target.closest?e.target.closest('a[href^="#"]'):null;if(t)e.preventDefault();},true);})();document.documentElement.classList.add('w-mod-ix');document.documentElement.setAttribute('data-byq-thumbnail','');var mh=document.createElement('style');mh.textContent='html[data-byq-thumbnail] body,html[data-byq-thumbnail] body>*,html[data-byq-thumbnail] .section{min-height:0!important}';document.head.appendChild(mh);function triggerScroll(){try{var y=window.scrollY||window.pageYOffset||0;window.scrollTo(0,y+1);window.scrollTo(0,y);window.dispatchEvent(new Event('scroll'));window.dispatchEvent(new Event('resize'));if(window.ScrollTrigger&&window.ScrollTrigger.refresh)window.ScrollTrigger.refresh();}catch(e){}}window.addEventListener('load',function(){var ck=function(){var imgs=document.querySelectorAll('img');for(var i=0;i<imgs.length;i++){if(!imgs[i].complete){setTimeout(ck,50);return;}}var fn=function(){window.parent.postMessage({type:'thumbnail-ready'},'*');triggerScroll();setTimeout(triggerScroll,200);};if(document.fonts&&document.fonts.ready){document.fonts.ready.then(fn);}else{fn();}};ck();});window.addEventListener('message',function(e){if(e.data&&e.data.type==='play-animations'){var s=document.createElement('style');s.textContent='[data-w-id]{opacity:1!important;filter:none!important;-webkit-filter:none!important;transition:opacity 0.55s ease,filter 0.45s ease!important}';document.head.appendChild(s);var els=document.querySelectorAll('[data-w-id]');for(var i=0;i<els.length;i++){var el=els[i];if(!el.style.transform)continue;var cs=window.getComputedStyle(el);if(cs.animationName&&cs.animationName!=='none')continue;el.style.transition=(el.style.transition||'')+',transform 0.5s ease';el.style.transform='none';}triggerScroll();}});}})();</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pepsukka1 — Signal, an interactive dot-grid experience." />
+    <title>Pepsukka1 — Signal</title>
+
+    <!-- Brand tokens (shared) + demo frame (demo-only) + this gem's scoped CSS.
+         Only byq-brand.css and style.css travel with the copy-paste snippet;
+         gem-frame.css just centres the demo on this page. -->
+    <link rel="stylesheet" href="assets/byq-brand.css" />
+    <link rel="stylesheet" href="assets/gem-frame.css" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body class="dark byq-demo--full">
+    <!-- ===== GEM START — everything below is namespaced under .byq-gem--dot-grid-flicker-01 ===== -->
+    <section class="byq-gem byq-gem--dot-grid-flicker-01">
+      <canvas class="byq-gem--dot-grid-flicker-01__canvas" aria-hidden="true"></canvas>
+      <div class="byq-gem--dot-grid-flicker-01__label"><span>Signal</span></div>
+    </section>
+    <!-- ===== GEM END ===== -->
+
+    <script src="assets/script.js"></script>
+  <script>
+(function() {
+  function sendHeight() {
+    var docEl = document.documentElement;
+    var body  = document.body;
+    if (!body) return;
+    var prevDocH    = docEl.style.height;
+    var prevDocMinH = docEl.style.minHeight;
+    var prevBodyH    = body.style.height;
+    var prevBodyMinH = body.style.minHeight;
+    docEl.style.height = '0px';
+    docEl.style.minHeight = '0px';
+    body.style.height  = '0px';
+    body.style.minHeight = '0px';
+    // Use body.scrollHeight only — documentElement.scrollHeight is
+    // viewport-biased and always returns at least the iframe viewport
+    // height (so short sections in a tall iframe report wrong values).
+    var raw = body.scrollHeight;
+    docEl.style.height = prevDocH;
+    docEl.style.minHeight = prevDocMinH;
+    body.style.height  = prevBodyH;
+    body.style.minHeight = prevBodyMinH;
+    var height = Math.min(raw, 20000);
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: 'iframeHeight', height: height, id: window.location.pathname }, '*');
+    }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if (document.body) {
+    new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true });
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(sendHeight).observe(document.body);
+    }
+  }
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'requestHeight') sendHeight();
+  });
+})();
+</script>
+</body>
+</html>
