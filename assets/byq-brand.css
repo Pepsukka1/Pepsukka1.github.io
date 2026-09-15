@@ -1,0 +1,58 @@
+/* ============================================================
+   BYQ Supply — Brand Tokens
+   Lifted from the BYQ.supply Figma design system
+   (byq.supply/app/globals.css + tailwind.config.cjs).
+
+   Every gem references these `--byq-*` variables instead of
+   hardcoding colors / fonts / radius, so the whole library
+   feels like one cohesive, on-brand collection.
+
+   Light is the default. Add `class="dark"` to <body> (or any
+   ancestor of the gem) to switch to the dark palette.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --byq-bg: #f0eeed; /* Background / Base Light */
+  --byq-fg: #040404; /* Background / Contrast Light */
+  --byq-card: #ffffff; /* Background / Lift Light */
+  --byq-depth: #e2dfdc; /* Background / Depth Light — borders, subtle hover */
+
+  /* Accents — use sparingly as the "pop" */
+  --byq-accent-solar: #ffcd33; /* Accent / Solar Note (primary accent) */
+  --byq-accent-lime: #c5ef57; /* Accent / Lime Signal (secondary accent) */
+  --byq-error: #c9372d; /* Status / Error */
+
+  /* Foreground that sits on a solar/lime accent fill */
+  --byq-on-accent: #040404;
+
+  /* Shape */
+  --byq-radius: 0.5rem;
+  --byq-radius-lg: 1rem;
+
+  /* Type — matches byq.supply: "Raveo Display" for headings, "Inter" for body
+     copy. Both fall back gracefully when the font isn't self-hosted, so copied
+     snippets never break. Put --byq-font-display on headings/large display
+     type, --byq-font-sans on body text. */
+  --byq-font-display: "Raveo Display", "Raveo", Georgia, serif;
+  --byq-font-sans: "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --byq-font-mono: "Saans Mono", "Geist Mono", ui-monospace, "SF Mono",
+    Menlo, monospace;
+
+  /* Opacity tokens */
+  --byq-lift-opacity: rgba(255, 255, 255, 0.8);
+  --byq-tag-opacity: rgba(4, 4, 4, 0.08);
+}
+
+.dark {
+  --byq-bg: #070708; /* Background / Base Dark */
+  --byq-fg: #f6f3ec; /* Background / Contrast Dark */
+  --byq-card: #18191a; /* Background / Lift Dark */
+  --byq-depth: #2a2b2c; /* Background / Depth Dark */
+
+  --byq-on-accent: #040404; /* accents stay bright; text on them stays dark */
+
+  --byq-lift-opacity: rgba(24, 25, 26, 0.8);
+  --byq-tag-opacity: rgba(246, 243, 236, 0.08);
+}
